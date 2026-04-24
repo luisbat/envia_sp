@@ -1,0 +1,13 @@
+version: '3'
+services:
+  udp-broadcast-relay:
+    build: .
+    container_name: envia_sp
+    network_mode: host   # Clave para recibir broadcast
+    environment:
+      - FOREGROUND=true   # si usas la variable para evitar daemonizar
+    restart: unless-stopped
+    # Opcional: montar volumen para logs si no usas stdout
+    volumes:
+      - ./logs:/var/log
+    # Si el script escribe en un PID file dentro del contenedor, puedes ignorarlo
