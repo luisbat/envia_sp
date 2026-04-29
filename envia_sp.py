@@ -39,10 +39,13 @@ def main():
             
             if linea.strip():
                 partes = linea.split('>')
-                id_modem = partes[1].split(';')[2]
-                if id_modem == "448":
+                campos = partes[1].split(';')
+                id_modem = campos[2]
+                hora = int(campos[1].split(':')[1])
+                if id_modem == "448" and hora % 2 == 0:     # Solo se envian las lineas del modem 448 y en hora par
                     send_socket.sendto((linea + '\n').encode('utf-8'), destino)
-#                    print(f"Reenviado desde {addr}: {linea.strip()}")                    
+#                    print(f"Reenviado desde {addr}: {linea.strip()}")
+
     except KeyboardInterrupt:
         print("\nPrograma detenido por el usuario.")
     finally:
