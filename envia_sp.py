@@ -41,7 +41,7 @@ def main():
                 partes = linea.split('>')
                 campos = partes[1].split(';')
                 id_modem = campos[2]
-                hora = int(campos[1].split(':')[1])
+                hora = int(campos[1].split(':')[0])
                 if id_modem == "448" and hora % 2 == 0:     # Solo se envian las lineas del modem 448 y en hora par
                     send_socket.sendto((linea + '\n').encode('utf-8'), destino)
 #                    print(f"Reenviado desde {addr}: {linea.strip()}")
